@@ -1,0 +1,24 @@
+{
+    "name": "git-who",
+    "version": "1.0.0",
+    "description": "List remote branches by author and date of last commit",
+    "main": "index.js",
+    "scripts": {
+	"test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "bin": {
+	"git-who-js": "index.js"
+    },
+    "keywords": [
+	"git",
+	"remote",
+	"branches",
+	"team",
+	"manage"
+    ],
+    "author": "Lachlan Krautz",
+    "license": "MIT",
+    "dependencies": {
+	"commander": "^2.0.0"
+    }
+}
