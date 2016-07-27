@@ -1,6 +1,6 @@
 {
   "name": "git-who",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "List remote branches by author and date of last commit",
   "main": "index.js",
   "scripts": {

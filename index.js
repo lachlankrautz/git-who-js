@@ -5,8 +5,8 @@ const moment  = require("moment");
 const colors  = require("colors");
 const day_90  = moment().subtract(90, "day");
 const day_180 = moment().subtract(180, "day");
-const spawn   = require("child_process").spawn;
-const git     = spawn("git", [
+const child   = require("child_process");
+const git     = child.spawn("git", [
     "for-each-ref",
     "--format=%(authorname)^~^%(refname:short)^~^%(committerdate:iso8601)",
     "refs/remotes/origin"
@@ -52,7 +52,7 @@ function printBranch (branch) {
     console.log(`${clean}`);
 }
 
-git.stdout.on("data", (data) => {
+git.stdout.on("data", data => {
     this.max = 0;
     data.toString()
         .split(/\r?\n/)
