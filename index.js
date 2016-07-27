@@ -53,13 +53,13 @@ function printBranch (branch) {
 }
 
 git.stdout.on("data", data => {
-    this.max = 0;
+    var counter = {max: 0};
     data.toString()
         .split(/\r?\n/)
         .filter(goodLine)
-        .map(makeBranch, this)
+        .map(makeBranch, counter)
         .sort(sortBranch)
-        .forEach(printBranch, this);
+        .forEach(printBranch, counter);
 });
 
 git.stderr.on("data", () => {
