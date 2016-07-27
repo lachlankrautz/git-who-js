@@ -45,8 +45,8 @@ function sortBranch (a, b) {
     }
     return order;
 }
-function formatBranch (branch) {
-    var gap  = " ".repeat(this.max - branch.author.length);
+function formatBranch (max, branch) {
+    var gap  = " ".repeat(max - branch.author.length);
     var date = branch.date;
     return `[${get_coloured_date(date)}] ${branch.author}${gap} ${branch.name}`;
 }
@@ -58,7 +58,7 @@ git.stdout.on("data", data => {
                       .filter(goodLine)
                       .map(makeBranch, counter)
                       .sort(sortBranch)
-                      .map(formatBranch, counter)
+                      .map(formatBranch.bind({}, counter.max))
                       .join("\n");
     console.log(output);
 });
