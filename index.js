@@ -1,23 +1,16 @@
 #!/usr/bin/env node
-'use strict';
+"use strict";
 
-//const program = require('commander');
-//program.version('0.1');
-//program.parse(process.argv);
-
-const spawn  = require('child_process').spawn;
-const git    = spawn('git', [
-    'for-each-ref',
-    '--format=%(authorname)^~^%(refname:short)^~^%(committerdate:iso8601)',
-    'refs/remotes/origin'
+const moment  = require("moment");
+const colors  = require("colors");
+const day_90  = moment().subtract(90, "day");
+const day_180 = moment().subtract(180, "day");
+const spawn   = require("child_process").spawn;
+const git     = spawn("git", [
+    "for-each-ref",
+    "--format=%(authorname)^~^%(refname:short)^~^%(committerdate:iso8601)",
+    "refs/remotes/origin"
 ]);
-const moment = require('moment');
-const colors = require('colors');
-
-var day_90  = moment();
-var day_180 = moment();
-day_90.subtract(90, "day");
-day_180.subtract(180, "day");
 
 function get_coloured_date (date) {
     var str = date.format("YYYY-MM-DD");
@@ -59,7 +52,7 @@ function printBranch (branch) {
     console.log(`${clean}`);
 }
 
-git.stdout.on('data', (data) => {
+git.stdout.on("data", (data) => {
     this.max = 0;
     data.toString()
         .split(/\r?\n/)
@@ -69,7 +62,7 @@ git.stdout.on('data', (data) => {
         .forEach(printBranch, this);
 });
 
-git.stderr.on('data', () => {
+git.stderr.on("data", () => {
     console.log(`Unable to display branches`);
     process.exit(0);
 });
