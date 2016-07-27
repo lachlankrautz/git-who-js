@@ -45,21 +45,22 @@ function sortBranch (a, b) {
     }
     return order;
 }
-function printBranch (branch) {
-    var gap   = " ".repeat(this.max - branch.author.length);
-    var date  = branch.date;
-    var clean = `[${get_coloured_date(date)}] ${branch.author}${gap} ${branch.name}`;
-    console.log(`${clean}`);
+function formatBranch (branch) {
+    var gap  = " ".repeat(this.max - branch.author.length);
+    var date = branch.date;
+    return `[${get_coloured_date(date)}] ${branch.author}${gap} ${branch.name}`;
 }
 
 git.stdout.on("data", data => {
     var counter = {max: 0};
-    data.toString()
-        .split(/\r?\n/)
-        .filter(goodLine)
-        .map(makeBranch, counter)
-        .sort(sortBranch)
-        .forEach(printBranch, counter);
+    var output  = data.toString()
+                      .split(/\r?\n/)
+                      .filter(goodLine)
+                      .map(makeBranch, counter)
+                      .sort(sortBranch)
+                      .map(formatBranch, counter)
+                      .join("\n");
+    console.log(output);
 });
 
 git.stderr.on("data", () => {
