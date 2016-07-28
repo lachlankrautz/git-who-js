@@ -4,7 +4,7 @@ git-who
 List remote branches by author and date of last commit
  - Coloured dates highlight age
 
-# Example
+### Usage
 
 ```shell
 $ git-who
@@ -17,3 +17,11 @@ $ git-who
 [2015-09-16] Spock         3d-chess-notes
 [2015-10-12] Spock         hands-on-reactor-repair-guide
 ```
+
+### Install
+```shell
+$ npm install -g git-who
+```
+
+### Dependencies
+ - npm
